@@ -14,4 +14,9 @@ type Post {
 type Query {
   authors: [Author]
   author(id: Int!): Author
+  posts: [Post]
+}
+
+type Mutation {
+  upvotePost(postId: Int!): Post
 }

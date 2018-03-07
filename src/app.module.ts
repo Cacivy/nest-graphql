@@ -7,8 +7,8 @@ import {
 import { graphqlExpress, graphiqlExpress  } from 'apollo-server-express';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
 import { loggerMiddleware } from './common/middlewares/logger.middleware';
-import { UsersModule } from './users/users.module';
-import { AuthorModule } from './author/author.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthorModule } from './modules/authors/authors.module';
 
 @Module({
   imports: [UsersModule, GraphQLModule, AuthorModule],

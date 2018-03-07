@@ -1,12 +1,12 @@
 type Author {
-  id: Int!
+  id: String!
   firstName: String
   lastName: String
   posts: [Post]
 }
 
 type Post {
-  id: Int!
+  id: String!
   title: String
   votes: Int
 }
@@ -19,4 +19,6 @@ type Query {
 
 type Mutation {
   upvotePost(postId: Int!): Post
+  createPost(title: String!, votes: Int): Post
+  deletePost(id: String!): Boolean
 }

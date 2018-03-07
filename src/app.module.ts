@@ -6,12 +6,14 @@ import {
 } from '@nestjs/common';
 import { graphqlExpress, graphiqlExpress  } from 'apollo-server-express';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { loggerMiddleware } from './common/middlewares/logger.middleware';
 import { UsersModule } from './modules/users/users.module';
 import { AuthorModule } from './modules/authors/authors.module';
 
 @Module({
-  imports: [UsersModule, GraphQLModule, AuthorModule],
+  imports: [TypeOrmModule.forRoot(), 
+    UsersModule, GraphQLModule, AuthorModule],
 })
 export class ApplicationModule implements NestModule {
   constructor(private readonly graphQLFactory: GraphQLFactory) {}

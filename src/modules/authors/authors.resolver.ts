@@ -1,6 +1,7 @@
 import { Query, Resolver, ResolveProperty, Mutation } from '@nestjs/graphql';
-import { AuthorsService } from './authors.service'
-import { PostsService } from './posts.service'
+import { AuthorsService } from './services/authors.service'
+import { PostsService } from './services/posts.service'
+import { Post } from './entities/post.entity';
 
 @Resolver('Author')
 export class AuthorResolver {
@@ -11,28 +12,37 @@ export class AuthorResolver {
 
 
   @Query('authors')
-  getAllAuthors() {
-    return this.authorsService.findAll()
+  async getAllAuthors() {
+    return await this.authorsService.findAll()
   }
 
   @Query('author')
-  getAuthor(obj, args, context, info) {
-    return this.authorsService.findOneById(args.id)
+  async getAuthor(obj, args, context, info) {
+    return await this.authorsService.findOneById(args.id)
   }
 
   @Query('posts')
-  getAllPosts() {
-    return this.postsService.findAll()
-  }
-
-  @ResolveProperty('posts')
-  getPosts(author) {
-    return this.postsService.findOneById(author.id)
+  async getAllPosts() {
+    return await this.postsService.findAll()
   }
 
   @Mutation()
-  upvotePost(_, { postId }) {
-    return this.postsService.upvoteById(postId);
+  async createPost(obj, args: Post, context, info) {
+    return await this.postsService.create(args)
   }
 
+  @ResolveProperty('posts')
+  async getPosts(author) {
+    return await this.postsService.findOneById(author.id)
+  }
+
+  @Mutation()
+  async upvotePost(_, { postId }) {
+    return await this.postsService.upvoteById(postId);
+  }
+
+  @Mutation()
+  async deletePost(obj, args) {
+    return await this.postsService.deleteById(args.id)
+  }
 }

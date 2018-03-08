@@ -16,7 +16,7 @@ export class PostsService {
   }
 
   async upvoteById(id: number) {
-    let post = await this.postRepository.findOne({id})
+    let post = await this.postRepository.findOneById(id)
     if (!post) {
       throw new Error(`Couldn't find post with id ${id}`);
     }
@@ -35,6 +35,6 @@ export class PostsService {
   }
 
   async delete(args) {
-    return await this.postRepository.remove(args)
+    return await this.postRepository.delete(args)
   }
 } 

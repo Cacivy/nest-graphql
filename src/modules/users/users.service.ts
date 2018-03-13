@@ -3,7 +3,13 @@ import { User } from './interfaces/user.interface';
 
 @Component()
 export class UsersService {
-  private readonly users: User[] = [];
+  private readonly users: User[] = [
+    {
+      id: 1,
+      name: 'alan',
+      age: 18
+    }
+  ];
 
   create(user: User) {
     this.users.push(user);
@@ -14,6 +20,6 @@ export class UsersService {
   }
 
   findById(id: number): User | undefined {
-    return this.users.find(x => x.id === id)
+    return this.users.find(x => x.id === +id)
   }
 }

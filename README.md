@@ -12,3 +12,9 @@ npm start
 // http://localhost:3003/graphiql
 ```
 
+### docker
+
+```bash
+docker-compose up
+```
+

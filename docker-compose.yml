@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  web:
+    build: .
+    ports:
+     - "3003:3003"
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGODB_DATABASE="nest"
+    ports:
+      - 27017:27017
